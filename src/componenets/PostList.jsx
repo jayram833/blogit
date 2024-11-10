@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import blogData from "../data/data";
 
@@ -13,6 +14,7 @@ function PostList() {
 }
 
 function ListItem({ item }) {
+  const navigate = useNavigate();
   const {
     title,
     imageUrl,
@@ -23,10 +25,15 @@ function ListItem({ item }) {
     tags,
     url,
     detailedBlog,
+    id,
   } = item;
 
+  function handleClick(id) {
+    navigate(`/singlepost/${id}`);
+  }
+
   return (
-    <div className="list-item">
+    <div className="list-item" onClick={() => handleClick(id)}>
       <h2 className="title">{title}</h2>
       <img className="thumbnail" src={imageUrl} alt={title} />
       <p className="excerpt">{excerpt}</p>
